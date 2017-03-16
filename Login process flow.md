@@ -26,20 +26,20 @@ If **action = sendConformationCode** it will be executed to send verfication cod
 
 #### Step 4.1
   
-    - Function **adminLogin** takes the input value object and passes to the wsdl call to admin login.
-    - In action, first wsdl client connection will be set by calling function **setWSClient**.
-    - Function **adminLogin** in LoginWS.php is used for admin login.
-    - Creating parameters for wsdl using object.
-    - Result returns the session id.
+ - Function **adminLogin** takes the input value object and passes to the wsdl call to admin login.
+ - In action, first wsdl client connection will be set by calling function **setWSClient**.
+ - Function **adminLogin** in LoginWS.php is used for admin login.
+ - Creating parameters for wsdl using object.
+ - Result returns the session id.
     
 #### Step 4.2
   
-    - If admin login is success, function **covertArrayToObject** is used to convert the array to object and set the values.
-    - Function **sendVerificationCode** takes the input value object and passes to the wsdl call to send password to the user.
-    - In action, first wsdl client connection will be set by calling function **setWSClient**.
-    - Function **checkUserNameExists** in LoginWS.php will check whether user exist or not. 
-    - Creating the parameters and calling the wsdl call **get_entry_list** which returns the user id.
-    - Function **covertArrayToObject** in LoginData.php which is used to convert the array to object and set the values and will get the result count by **getResultCount** in action.
+  - If admin login is success, function **covertArrayToObject** is used to convert the array to object and set the values.
+  - Function **sendVerificationCode** takes the input value object and passes to the wsdl call to send password to the user.
+  - In action, first wsdl client connection will be set by calling function **setWSClient**.
+  - Function **checkUserNameExists** in LoginWS.php will check whether user exist or not. 
+  - Creating the parameters and calling the wsdl call **get_entry_list** which returns the user id.
+  - Function **covertArrayToObject** in LoginData.php which is used to convert the array to object and set the values and will get the result count by **getResultCount** in action.
 
 #### Step 4.3
 
