@@ -10,35 +10,43 @@ Check the action parameter(login,signup,corporate,sendConformationCode,ProcessLo
 
 #### Step 2:
 
-- If **action = login or signup** shows the login form by function **displayLoginForm**.
+- If **action = login or signup** it shows the login form by function **displayLoginForm**.
 - The function will display the tpl page as **loginForm.tpl** in views folder.
 
 #### Step 3:
 
-- If **action = corporate** shows the corporate login form by function **displayCorporateLoginForm**.
+- If **action = corporate** it shows the corporate login form by function **displayCorporateLoginForm**.
 - The function will display the tpl page as **loginFormCorporate.tpl** in views folder.
 
 #### Step 4:
 
--  If **action = sendConformationCode** will be executed to send verfication code to his mobile.
+If **action = sendConformationCode** it will be executed to send verfication code to his mobile.
 - From controller to action, function **createLoginVO** is used to set the parameters for login like country code,number password etc.
 - Result returns to controller.
 
-- Function **adminLogin** takes the input value object and passes to the wsdl call to admin login.
-- In action, first wsdl client connection will be set by calling function **setWSClient**.
-- Function **adminLogin** in LoginWS.php is used for admin login.
-- Creating parameters for wsdl using object.
-- Result returns the session id.
+#### Step 4.1
+  
+    - Function **adminLogin** takes the input value object and passes to the wsdl call to admin login.
+    - In action, first wsdl client connection will be set by calling function **setWSClient**.
+    - Function **adminLogin** in LoginWS.php is used for admin login.
+    - Creating parameters for wsdl using object.
+    - Result returns the session id.
+    
+#### Step 4.2
+  
+    - If admin login is success, function **covertArrayToObject** is used to convert the array to object and set the values.
+    - Function **sendVerificationCode** takes the input value object and passes to the wsdl call to send password to the user.
+    - In action, first wsdl client connection will be set by calling function **setWSClient**.
+    - Function **checkUserNameExists** in LoginWS.php will check whether user exist or not. 
+    - Creating the parameters and calling the wsdl call **get_entry_list** which returns the user id.
+    - Function **covertArrayToObject** in LoginData.php which is used to convert the array to object and set the values and will get the result count by **getResultCount** in action.
 
-- If admin login is success, function **covertArrayToObject** is used to convert the array to object and set the values.
-- Function **sendVerificationCode** takes the input value object and passes to the wsdl call to send password to the user.
-- In action, first wsdl client connection will be set by calling function **setWSClient**.
-- Function **checkUserNameExists** in LoginWS.php will check whether user exist or not. 
-- Creating the parameters and calling the wsdl call **get_entry_list** which returns the user id.
-- Function **covertArrayToObject** in LoginData.php which is used to convert the array to object and set the values and will get the result count by **getResultCount** in action.
+#### Step 4.3
 
 - If the result is 0, function **createNewUserDevice** will be called in action which is used to create new user device id .
 - The wsdl call will be **set_entry_user_devices** which returns the result as device id to action.
+
+#### Step 4.4
 
 - If the result is 1, it sets the user id, resend code and entry list id and calls the function **updateUserDevices** is used to update user devices.
 - will call the wsdl call **set_entry_user_devices** and pass the created parameters to it which returns the device id.
