@@ -1,3 +1,7 @@
+#### Date: 16/03/2017
+
+#### Description: This document explains the code flow of login process.
+
 
 Function **processFlow** will be called from index.php to controller. This function is the first and main function in application. In this function the main parameter is action because based on that action we process all the redirections and processes
 
